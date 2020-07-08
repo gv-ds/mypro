@@ -1,0 +1,42 @@
+#' @title Main Normtest Function
+#' @param x numeric vector
+#' @param ... any argument for inner function basic_stats
+#' @return list of class normtest
+#' @examples
+#' # Basic Examples
+#' set.seed(101)
+#' x <- rnorm(100, 7, 1)
+#' plot.normtest(x)
+#' test <- normtest(x)
+#' test
+#' summary(test)
+#'
+#' # Examples with na
+#' y <- x; y[7] <- NA
+#' plot.normtest(y)
+#' normtest(y, na.rm = TRUE)
+#'
+#' # non normal examples
+#' z <- rlnorm(100, 7, 2)
+#' plot.normtest(z)
+#' normtest(z)
+#' @export
+
+normtest <- function(x, ...){
+
+        basic_stats <- basic_stats(x, ...)
+        tests <- list(ks = ks(x, ...), ad = ad(x))
+        pl <- plot_normtest(x)
+        normtest <- list(basic_stats = basic_stats, tests = tests, plot = pl)
+        class(normtest) <- "normtest"
+        return(normtest)
+
+}
+##################################################################
+ hist(log(Broker$CaliberRevenue), 
+      main="CaliberRevenue", 
+      xlab="CaliberRevenue", 
+      border="light blue", 
+      col="blue", 
+      las=1, 
+      breaks=15)
